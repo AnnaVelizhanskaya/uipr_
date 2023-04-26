@@ -1,0 +1,55 @@
+using System;
+
+public class Program
+{
+    public static void Main()
+    {
+        Console.Write("Введите номер года: ");
+        int year = int.Parse(Console.ReadLine());
+
+        for (int month = 1; month <= 12; month++)
+        { // цикл по месяцам
+            DateTime date = new DateTime(year, month, 1); // создание даты с 1-м числом текущего месяца
+
+            while (date.DayOfWeek != DayOfWeek.Thursday)
+            { // пока день недели не четверг
+                date = date.AddDays(1); // добавляем по одному дню до тех пор, пока не станет четвергом
+            }
+
+            Console.WriteLine("{0} {1}", date.ToShortDateString(), GetMonthName(month)); // выводим найденную дату и название месяца
+        }
+    }
+
+    private static string GetMonthName(int month)
+    {
+        switch (month)
+        {
+            case 1:
+                return "январь";
+            case 2:
+                return "февраль";
+            case 3:
+                return "март";
+            case 4:
+                return "апрель";
+            case 5:
+                return "май";
+            case 6:
+                return "июнь";
+            case 7:
+                return "июль";
+            case 8:
+                return "август";
+            case 9:
+                return "сентябрь";
+            case 10:
+                return "октябрь";
+            case 11:
+                return "ноябрь";
+            case 12:
+                return "декабрь";
+            default:
+                return "";
+        }
+    }
+}
