@@ -1,0 +1,16 @@
+using System;
+namespace Program
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Console.WriteLine("Введите значение объема");
+            double objem = Convert.ToDouble(Console.ReadLine());
+            Console.WriteLine("Введите значение площади");
+            double ploshad = Convert.ToDouble(Console.ReadLine());
+            double visota = objem / ploshad;
+            Console.WriteLine($"Высота = {visota}");
+        }
+    }
+}   
