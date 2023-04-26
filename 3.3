@@ -1,0 +1,38 @@
+using System;
+
+namespace GuessTheNumber
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Console.Write("Введите число, до которого компьютер будет загадывать: ");
+            int max = Convert.ToInt32(Console.ReadLine());
+            Random rnd = new Random();
+            int numberToGuess = rnd.Next(1, max + 1);
+
+            Console.Write("Введите количество попыток: ");
+            int attempts = Convert.ToInt32(Console.ReadLine());
+
+            Console.WriteLine("У вас есть {0} попыток, чтобы угадать число от 1 до {1}", attempts, max);
+            for (int i = 0; i < attempts; i++)
+            {
+                int userAnswer = Convert.ToInt32(Console.ReadLine());
+                if (userAnswer == numberToGuess)
+                {
+                    Console.WriteLine("Вы угадали!");
+                    return;
+                }
+                else if (userAnswer > numberToGuess)
+                {
+                    Console.WriteLine("Загаданное число меньше");
+                }
+                else
+                {
+                    Console.WriteLine("Загаданное число больше");
+                }
+            }
+            Console.WriteLine("Попытки закончились. Было загадано число {0}.", numberToGuess);
+        }
+    }
+}
