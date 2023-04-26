@@ -1,0 +1,72 @@
+using System;
+
+class Program
+{
+    static void Main(string[] args)
+    {
+        Console.Write("Введите день: ");
+        int a = int.Parse(Console.ReadLine());
+        Console.Write("Введите месяц: ");
+        int b = int.Parse(Console.ReadLine());
+        Console.Write("Введите год: ");
+        int c = int.Parse(Console.ReadLine());
+
+        // проверка корректности даты
+        bool correctDate = true;
+        if (b < 1 || b > 12)
+            correctDate = false;
+        else if (a < 1)
+            correctDate = false;
+        else
+        {
+            int daysInMonth = DaysInMonth(b, c);
+            if (a > daysInMonth)
+                correctDate = false;
+        }
+
+        if (!correctDate)
+        {
+            Console.WriteLine("Некорректная дата");
+            return;
+        }
+
+        // вычисление номера дня с начала года
+        int dayOfYear = 0;
+        for (int m = 1; m < b; m++)
+            dayOfYear += DaysInMonth(m, c);
+        dayOfYear += a;
+
+        Console.WriteLine("Номер дня с начала года: " + dayOfYear);
+
+        // вычисление количества дней до конца года
+        int daysLeft = 0;
+        for (int m = b + 1; m <= 12; m++)
+            daysLeft += DaysInMonth(m, c);
+        daysLeft += DaysInMonth(b, c) - a;
+
+        Console.WriteLine("Дней до конца года: " + daysLeft);
+    }
+
+    // функция для определения количества дней в месяце
+    static int DaysInMonth(int b, int c)
+    {
+        switch (b)
+        {
+            case 2:
+                return IsLeapYear(c) ? 29 : 28;
+            case 4:
+            case 6:
+            case 9:
+            case 11:
+                return 30;
+            default:
+                return 31;
+        }
+    }
+
+    // функция для определения, является ли год високосным
+    static bool IsLeapYear(int c)
+    {
+        return (c % 4 == 0 && c % 100 != 0) || c % 400 == 0;
+    }
+}
